@@ -61,5 +61,9 @@ module Ft8reporter
     #     render 'errors/500'
     #   end
     #
+    get '/' do
+      @last_spots = Spot.limit(100).all
+      render 'index'
+    end
   end
 end
