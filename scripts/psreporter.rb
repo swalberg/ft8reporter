@@ -41,7 +41,7 @@ def find_spots_for(call)
   stations.each do |s|
     spot = Spot.new(
       timestamp: Time.now,
-      sender: mycall,
+      sender: call,
       spotter: s[:call],
       frequency: s[:frequency],
       mode: s[:mode],
