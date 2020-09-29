@@ -1,0 +1,137 @@
+<% error = @spot.errors.key?(:timestamp) && @spot.errors[:timestamp].count > 0 %>
+<fieldset class='control-group <%= error ? 'has-error' : ''%>'>
+  <%= f.label :timestamp, :class => 'control-label' %>
+  <div class='controls'>
+    <%= f.text_field :timestamp, :class => 'form-control input-xlarge input-with-feedback', :autofocus => true %>
+    <span class='help-inline'><%= error ? f.error_message_on(:timestamp) : "Ex: a simple text" %></span>
+  </div>
+</fieldset>
+<% error = @spot.errors.key?(:sender) && @spot.errors[:sender].count > 0 %>
+<fieldset class='control-group <%= error ? 'has-error' : ''%>'>
+  <%= f.label :sender, :class => 'control-label' %>
+  <div class='controls'>
+    <%= f.text_field :sender, :class => 'form-control input-xlarge input-with-feedback' %>
+    <span class='help-inline'><%= error ? f.error_message_on(:sender) : "Ex: a simple text" %></span>
+  </div>
+</fieldset>
+<% error = @spot.errors.key?(:spotter) && @spot.errors[:spotter].count > 0 %>
+<fieldset class='control-group <%= error ? 'has-error' : ''%>'>
+  <%= f.label :spotter, :class => 'control-label' %>
+  <div class='controls'>
+    <%= f.text_field :spotter, :class => 'form-control input-xlarge input-with-feedback' %>
+    <span class='help-inline'><%= error ? f.error_message_on(:spotter) : "Ex: a simple text" %></span>
+  </div>
+</fieldset>
+<% error = @spot.errors.key?(:frequency) && @spot.errors[:frequency].count > 0 %>
+<fieldset class='control-group <%= error ? 'has-error' : ''%>'>
+  <%= f.label :frequency, :class => 'control-label' %>
+  <div class='controls'>
+    <%= f.text_field :frequency, :class => 'form-control input-xlarge input-with-feedback' %>
+    <span class='help-inline'><%= error ? f.error_message_on(:frequency) : "Ex: a simple text" %></span>
+  </div>
+</fieldset>
+<% error = @spot.errors.key?(:band) && @spot.errors[:band].count > 0 %>
+<fieldset class='control-group <%= error ? 'has-error' : ''%>'>
+  <%= f.label :band, :class => 'control-label' %>
+  <div class='controls'>
+    <%= f.text_field :band, :class => 'form-control input-xlarge input-with-feedback' %>
+    <span class='help-inline'><%= error ? f.error_message_on(:band) : "Ex: a simple text" %></span>
+  </div>
+</fieldset>
+<% error = @spot.errors.key?(:mode) && @spot.errors[:mode].count > 0 %>
+<fieldset class='control-group <%= error ? 'has-error' : ''%>'>
+  <%= f.label :mode, :class => 'control-label' %>
+  <div class='controls'>
+    <%= f.text_field :mode, :class => 'form-control input-xlarge input-with-feedback' %>
+    <span class='help-inline'><%= error ? f.error_message_on(:mode) : "Ex: a simple text" %></span>
+  </div>
+</fieldset>
+<% error = @spot.errors.key?(:range) && @spot.errors[:range].count > 0 %>
+<fieldset class='control-group <%= error ? 'has-error' : ''%>'>
+  <%= f.label :range, :class => 'control-label' %>
+  <div class='controls'>
+    <%= f.text_field :range, :class => 'form-control input-xlarge input-with-feedback' %>
+    <span class='help-inline'><%= error ? f.error_message_on(:range) : "Ex: a simple text" %></span>
+  </div>
+</fieldset>
+<% error = @spot.errors.key?(:bearing) && @spot.errors[:bearing].count > 0 %>
+<fieldset class='control-group <%= error ? 'has-error' : ''%>'>
+  <%= f.label :bearing, :class => 'control-label' %>
+  <div class='controls'>
+    <%= f.text_field :bearing, :class => 'form-control input-xlarge input-with-feedback' %>
+    <span class='help-inline'><%= error ? f.error_message_on(:bearing) : "Ex: a simple text" %></span>
+  </div>
+</fieldset>
+<% error = @spot.errors.key?(:lat) && @spot.errors[:lat].count > 0 %>
+<fieldset class='control-group <%= error ? 'has-error' : ''%>'>
+  <%= f.label :lat, :class => 'control-label' %>
+  <div class='controls'>
+    <%= f.text_field :lat, :class => 'form-control input-xlarge input-with-feedback' %>
+    <span class='help-inline'><%= error ? f.error_message_on(:lat) : "Ex: a simple text" %></span>
+  </div>
+</fieldset>
+<% error = @spot.errors.key?(:lon) && @spot.errors[:lon].count > 0 %>
+<fieldset class='control-group <%= error ? 'has-error' : ''%>'>
+  <%= f.label :lon, :class => 'control-label' %>
+  <div class='controls'>
+    <%= f.text_field :lon, :class => 'form-control input-xlarge input-with-feedback' %>
+    <span class='help-inline'><%= error ? f.error_message_on(:lon) : "Ex: a simple text" %></span>
+  </div>
+</fieldset>
+<% error = @spot.errors.key?(:snr) && @spot.errors[:snr].count > 0 %>
+<fieldset class='control-group <%= error ? 'has-error' : ''%>'>
+  <%= f.label :snr, :class => 'control-label' %>
+  <div class='controls'>
+    <%= f.text_field :snr, :class => 'form-control input-xlarge input-with-feedback' %>
+    <span class='help-inline'><%= error ? f.error_message_on(:snr) : "Ex: a simple text" %></span>
+  </div>
+</fieldset>
+<% error = @spot.errors.key?(:grid) && @spot.errors[:grid].count > 0 %>
+<fieldset class='control-group <%= error ? 'has-error' : ''%>'>
+  <%= f.label :grid, :class => 'control-label' %>
+  <div class='controls'>
+    <%= f.text_field :grid, :class => 'form-control input-xlarge input-with-feedback' %>
+    <span class='help-inline'><%= error ? f.error_message_on(:grid) : "Ex: a simple text" %></span>
+  </div>
+</fieldset>
+<% error = @spot.errors.key?(:region) && @spot.errors[:region].count > 0 %>
+<fieldset class='control-group <%= error ? 'has-error' : ''%>'>
+  <%= f.label :region, :class => 'control-label' %>
+  <div class='controls'>
+    <%= f.text_field :region, :class => 'form-control input-xlarge input-with-feedback' %>
+    <span class='help-inline'><%= error ? f.error_message_on(:region) : "Ex: a simple text" %></span>
+  </div>
+</fieldset>
+<% error = @spot.errors.key?(:dxcc) && @spot.errors[:dxcc].count > 0 %>
+<fieldset class='control-group <%= error ? 'has-error' : ''%>'>
+  <%= f.label :dxcc, :class => 'control-label' %>
+  <div class='controls'>
+    <%= f.text_field :dxcc, :class => 'form-control input-xlarge input-with-feedback' %>
+    <span class='help-inline'><%= error ? f.error_message_on(:dxcc) : "Ex: a simple text" %></span>
+  </div>
+</fieldset>
+<% error = @spot.errors.key?(:decoder) && @spot.errors[:decoder].count > 0 %>
+<fieldset class='control-group <%= error ? 'has-error' : ''%>'>
+  <%= f.label :decoder, :class => 'control-label' %>
+  <div class='controls'>
+    <%= f.text_field :decoder, :class => 'form-control input-xlarge input-with-feedback' %>
+    <span class='help-inline'><%= error ? f.error_message_on(:decoder) : "Ex: a simple text" %></span>
+  </div>
+</fieldset>
+<% error = @spot.errors.key?(:antenna) && @spot.errors[:antenna].count > 0 %>
+<fieldset class='control-group <%= error ? 'has-error' : ''%>'>
+  <%= f.label :antenna, :class => 'control-label' %>
+  <div class='controls'>
+    <%= f.text_field :antenna, :class => 'form-control input-xlarge input-with-feedback' %>
+    <span class='help-inline'><%= error ? f.error_message_on(:antenna) : "Ex: a simple text" %></span>
+  </div>
+</fieldset>
+
+
+<div class="form-actions">
+  <%= f.submit pat(:save), :class => 'btn btn-primary' %>
+  &nbsp;
+  <%= f.submit pat(:save_and_continue), :class => 'btn btn-info', :name => 'save_and_continue' %>
+  &nbsp;
+  <%= link_to pat(:cancel), url(:spots, :index), :class => 'btn btn-default' %>
+</div>

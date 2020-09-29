@@ -17,10 +17,13 @@ source 'https://rubygems.org'
 gem 'rake'
 
 # Component requirements
+gem 'activesupport', '>= 3.1'
+gem 'bcrypt'
 gem 'sass'
 gem 'erubi', '~> 1.6'
 gem 'sqlite3'
 gem 'sequel'
+gem 'json'
 
 # Test requirements
 gem 'rspec', :group => 'test'
@@ -36,3 +39,6 @@ gem 'padrino', '0.15.0'
 # %w(core support gen helpers cache mailer admin).each do |g|
 #   gem 'padrino-' + g, '0.15.0'
 # end
+
+gem 'haversine'
+gem 'maidenhead'
