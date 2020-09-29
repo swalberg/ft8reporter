@@ -62,7 +62,7 @@ module Ft8reporter
     #   end
     #
     get '/' do
-      @last_spots = Spot.limit(100).all
+      @last_spots = Spot.reverse(:id).limit(100).all
       render 'index'
     end
   end
