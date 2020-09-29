@@ -8,7 +8,7 @@ require_relative '../models/spot'
 require_relative '../models/monitored_call'
 
 def find_spots_for(call)
-  uri = URI.parse "https://pskreporter.info/cgi-bin/pskquery5.pl?encap=0&callback=doNothing&statistics=1&noactive=1&nolocator=1&flowStartSeconds=-900&frange=12000000-16000000&senderCallsign=#{call}"
+  uri = URI.parse "https://pskreporter.info/cgi-bin/pskquery5.pl?encap=0&callback=doNothing&statistics=1&noactive=1&nolocator=1&flowStartSeconds=-900&senderCallsign=#{call}&lastDuration=1089"
   raw = uri.read
   puts raw
 
