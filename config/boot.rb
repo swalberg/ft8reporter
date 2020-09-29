@@ -5,6 +5,8 @@ PADRINO_ROOT = File.expand_path('../..', __FILE__) unless defined?(PADRINO_ROOT)
 # Load our dependencies
 require 'bundler/setup'
 Bundler.require(:default, RACK_ENV)
+Sequel::Model.plugin :json_serializer
+
 
 ##
 # ## Enable devel logging

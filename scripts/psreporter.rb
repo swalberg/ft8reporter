@@ -61,6 +61,7 @@ def find_spots_for(call)
 end
 
 MonitoredCall.all do |call|
+  sleep 10
   puts "Checking #{call.callsign}"
   find_spots_for call.callsign
 rescue OpenURI::HTTPError => e
