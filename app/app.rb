@@ -76,6 +76,7 @@ module Ft8reporter
           },
           properties: {
             name: spot.spotter,
+            sender: spot.sender,
             snr: spot.snr
           }
         }

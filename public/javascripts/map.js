@@ -23,8 +23,9 @@ function initMap() {
   // defined in the function passed to setStyle()
   map.data.addListener('mouseover', function(event) {
       var call = event.feature.getProperty("name");
+      var sender = event.feature.getProperty("sender");
       var snr = event.feature.getProperty("snr");
-      infowindow.setContent("<div style='width:150px; text-align: center;'>"+call+" SNR="+snr+"</div>");
+      infowindow.setContent("<div style='width:150px; text-align: center;'>"+call+" de " + sender + " SNR="+snr+"</div>");
       infowindow.setPosition(event.feature.getGeometry().get());
       infowindow.setOptions({pixelOffset: new google.maps.Size(0,-30)});
       infowindow.open(map);
