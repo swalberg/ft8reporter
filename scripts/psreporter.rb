@@ -7,10 +7,9 @@ require_relative 'position'
 require_relative '../models/spot'
 require_relative '../models/monitored_call'
 
-def find_spots_for(call)
+def find_spots_for(call, observation)
   uri = URI.parse "https://pskreporter.info/cgi-bin/pskquery5.pl?encap=0&callback=doNothing&statistics=1&noactive=1&nolocator=1&flowStartSeconds=-900&senderCallsign=#{call}&lastDuration=1089"
   raw = uri.read
-  puts raw
 
   raw.gsub!(/^doNothing\(/m, '')
   raw.gsub!(/^\);$/m, '')
@@ -36,10 +35,9 @@ def find_spots_for(call)
   end
 
   puts "Heard from #{stations.count} stations"
-  far = stations.max_by { |m| m[:range] }
-  puts "Furthest station is #{far}"
   stations.each do |s|
     spot = Spot.new(
+      observation_period: observation,
       timestamp: Time.now,
       sender: call,
       spotter: s[:call],
@@ -60,11 +58,16 @@ def find_spots_for(call)
   end
 end
 
+observation = ObservationPeriod.new(run_start: Time.now)
+observation.save
 MonitoredCall.all do |call|
-  sleep 10
+  sleep 5
   puts "Checking #{call.callsign}"
-  find_spots_for call.callsign
+  find_spots_for call.callsign, observation
 rescue OpenURI::HTTPError => e
   puts "Error! #{e}"
 end
+
+observation.run_end = Time.now
+observation.save
 
