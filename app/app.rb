@@ -70,7 +70,7 @@ module Ft8reporter
     end
 
 		get '/last_spots', :provides => :json do
-			@last_spots = Spot.reverse(:id).limit(100).all
+      @last_spots = ObservationPeriod.last.spots
       all = @last_spots.map do |spot|
         {
           type: 'Feature',
