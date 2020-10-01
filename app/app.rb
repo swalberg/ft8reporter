@@ -65,6 +65,10 @@ module Ft8reporter
 			render 'index'
 		end
 
+		get '/calls', :provides => :json do
+      MonitoredCall.all.to_json
+    end
+
 		get '/last_spots', :provides => :json do
 			@last_spots = Spot.reverse(:id).limit(100).all
       all = @last_spots.map do |spot|

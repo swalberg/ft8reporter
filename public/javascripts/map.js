@@ -35,3 +35,19 @@ function initMap() {
       infowindow.close();
     });
 }
+
+$(document).ready(function() {
+
+    $.ajax({
+        url: "/calls.json",
+      })
+    .done(function( data ) {
+        $.each(data, function(i, call) {
+            $('#calls').append(
+              $('<li>').append(
+                $('<a>').attr('href','#').append(
+                  call.callsign
+                )));
+          });
+      });
+  });
