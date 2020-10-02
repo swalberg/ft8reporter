@@ -69,10 +69,20 @@ module Ft8reporter
       MonitoredCall.all.to_json
     end
 
-		get '/last_spots', :provides => :json do
-      @last_spots = ObservationPeriod.last.spots
-      all = @last_spots.map do |spot|
-        {
+    get '/observations', :provides => :json do
+      ObservationPeriod.order(Sequel.desc(:run_start)).all.to_json
+    end
+
+	get '/spots', :provides => :json do
+		@obs =  if params[:id]
+							ObservationPeriod.where(id: params[:id]).first
+						else
+							ObservationPeriod.last
+						end
+
+		@spots = Spot.where(observation_period_id: @obs.id)
+    all = @spots.map do |spot|
+      {
           type: 'Feature',
           geometry: {
             type: 'Point',

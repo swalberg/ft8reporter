@@ -23,7 +23,7 @@ function initMap() {
 		content: 'Hello World!',
 		map: map
 	});
-  map.data.loadGeoJson('last_spots.json');
+  map.data.loadGeoJson('spots.json');
   map.data.addListener('click', function(event) {
     });
 
@@ -59,17 +59,33 @@ function initMap() {
 }
 
 $(document).ready(function() {
-
+    $.ajax({ url: "/observations.json" })
+    .done(function(data) {
+        $.each(data, function(i, obs) {
+            $('#observations').append(
+              $('<option>').attr('value', obs.id).append(obs.run_start)
+            );
+        });
+        $('#observations').change(function() {
+          map.data.forEach(function(feature) {
+            map.data.remove(feature);
+          });
+          map.data.loadGeoJson('spots.json?id=' + $(this).val());
+        });
+    });
     $.ajax({
-        url: "/calls.json",
-      })
+          url: "/calls.json",
+        })
     .done(function( data ) {
         $.each(data, function(i, call) {
             $('#calls').append(
               $('<li>').append(
-                $('<a>').attr('href','#').append(
+                $('<a>').attr('href','#').attr('class', 'callsign').append(
                   call.callsign
                 )));
+          });
+        $('a.callsign').click(function() {
+            console.log("click!", $(this).text());
           });
       });
   });
