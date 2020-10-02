@@ -46,10 +46,10 @@ function initMap() {
 
   map.data.setStyle(function(feature) {
       var snr = feature.getProperty('snr'); // -25 to 25
-      var icon = "http://maps.google.com/mapfiles/ms/icons/red-dot.png";
-      if (snr > -15) { icon = "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"; }
-      if (snr > -5) { icon = "http://maps.google.com/mapfiles/ms/icons/yellow-dot.png"; }
-      if (snr > 5) { icon = "http://maps.google.com/mapfiles/ms/icons/green-dot.png"; }
+      var icon = "https://maps.google.com/mapfiles/ms/icons/red-dot.png";
+      if (snr > -15) { icon = "https://maps.google.com/mapfiles/ms/icons/blue-dot.png"; }
+      if (snr > -5) { icon = "https://maps.google.com/mapfiles/ms/icons/yellow-dot.png"; }
+      if (snr > 5) { icon = "https://maps.google.com/mapfiles/ms/icons/green-dot.png"; }
 
       return {
         icon: icon,
