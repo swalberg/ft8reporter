@@ -10,6 +10,24 @@ function hex(c) {
   return s.charAt ((i - i % 16) / 16) + s.charAt (i % 16);
 }
 
+var styleFeatures = function(feature) {
+  console.log("styling");
+  var isVisible = !($('#' + feature.getProperty('sender')).hasClass('stroked') 
+    || $('#band_' + feature.getProperty('band') + 'm').hasClass('stroked'));
+  var snr = feature.getProperty('snr'); // -25 to 25
+  var icon = "https://maps.google.com/mapfiles/ms/icons/red-dot.png";
+  if (snr > -15) { icon = "https://maps.google.com/mapfiles/ms/icons/blue-dot.png"; }
+  if (snr > -5) { icon = "https://maps.google.com/mapfiles/ms/icons/yellow-dot.png"; }
+  if (snr > 5) { icon = "https://maps.google.com/mapfiles/ms/icons/green-dot.png"; }
+
+  return {
+    icon: icon,
+    strokeWeight: 1,
+    visible: isVisible
+  };
+};
+
+
 
 function initMap() {
   map = new google.maps.Map(document.getElementById("map"), {
@@ -34,7 +52,8 @@ function initMap() {
       var call = event.feature.getProperty("name");
       var sender = event.feature.getProperty("sender");
       var snr = event.feature.getProperty("snr");
-      infowindow.setContent("<div style='width:150px; text-align: center;'>"+call+" de " + sender + " SNR="+snr+"</div>");
+      var band = event.feature.getProperty("band");
+      infowindow.setContent("<div style='width:150px; text-align: center;'>"+call+" de " + sender + " SNR="+snr+" Band="+band +"</div>");
       infowindow.setPosition(event.feature.getGeometry().get());
       infowindow.setOptions({pixelOffset: new google.maps.Size(0,-30)});
       infowindow.open(map);
@@ -45,20 +64,15 @@ function initMap() {
     });
 
   map.data.setStyle(function(feature) {
-      var snr = feature.getProperty('snr'); // -25 to 25
-      var icon = "https://maps.google.com/mapfiles/ms/icons/red-dot.png";
-      if (snr > -15) { icon = "https://maps.google.com/mapfiles/ms/icons/blue-dot.png"; }
-      if (snr > -5) { icon = "https://maps.google.com/mapfiles/ms/icons/yellow-dot.png"; }
-      if (snr > 5) { icon = "https://maps.google.com/mapfiles/ms/icons/green-dot.png"; }
-
-      return {
-        icon: icon,
-        strokeWeight: 1
-      };
+      return styleFeatures(feature);
     });
 }
 
 $(document).ready(function() {
+    $('a.band').click(function() {
+        $(this).toggleClass('stroked');
+        map.data.setStyle(styleFeatures);
+      });
     $.ajax({ url: "/observations.json" })
     .done(function(data) {
         $.each(data, function(i, obs) {
@@ -80,12 +94,14 @@ $(document).ready(function() {
         $.each(data, function(i, call) {
             $('#calls').append(
               $('<li>').append(
-                $('<a>').attr('href','#').attr('class', 'callsign').append(
+                $('<a>').attr('href','#').attr('class', 'callsign')
+                .attr('id', call.callsign).append(
                   call.callsign
                 )));
           });
         $('a.callsign').click(function() {
-            console.log("click!", $(this).text());
+            $(this).toggleClass('stroked');
+            map.data.setStyle(styleFeatures);
           });
       });
   });

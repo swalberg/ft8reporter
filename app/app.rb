@@ -89,6 +89,7 @@ module Ft8reporter
             coordinates: [spot.lon, spot.lat]
           },
           properties: {
+            band: spot.band,
             name: spot.spotter,
             sender: spot.sender,
             snr: spot.snr
