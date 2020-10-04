@@ -82,33 +82,14 @@ module Ft8reporter
       end
     end
 
-    get '/spots', :provides => :json do
-      @obs =  if params[:id]
-                ObservationPeriod.where(id: params[:id]).first
-              else
-                ObservationPeriod.last
-              end
+    get '/spots', :provides => :json, :with => :id do
+      @obs = ObservationPeriod.where(id: params[:id]).first
+      FeaturesHelper.create_feature_collection(@obs)
+    end
 
-      @spots = Spot.where(observation_period_id: @obs.id)
-      all = @spots.map do |spot|
-        {
-          type: 'Feature',
-          geometry: {
-            type: 'Point',
-            coordinates: [spot.lon, spot.lat]
-          },
-          properties: {
-            band: spot.band,
-            name: spot.spotter,
-            sender: spot.sender,
-            snr: spot.snr
-          }
-        }
-      end
-      {
-        type: 'FeatureCollection',
-        features: all
-      }.to_json
+    get '/spots', :provides => :json do
+      @obs =  ObservationPeriod.last
+      FeaturesHelper.create_feature_collection(@obs)
     end
   end
 end

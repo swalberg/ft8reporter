@@ -84,7 +84,7 @@ $(document).ready(function() {
           map.data.forEach(function(feature) {
             map.data.remove(feature);
           });
-          map.data.loadGeoJson('spots.json?id=' + $(this).val());
+        map.data.loadGeoJson('spots/' + $(this).val() + '.json')
         });
     });
     $.ajax({

@@ -5,6 +5,22 @@ class Spot < Sequel::Model
     [ id, timestamp, sender, spotter, frequency, band, mode, range, bearing, lat, lon, snr, grid, region, dxcc, decoder, antenna ]
   end
 
+  def to_feature
+    {
+      type: 'Feature',
+      geometry: {
+        type: 'Point',
+        coordinates: [lon, lat]
+      },
+      properties: {
+        band: band,
+        name: spotter,
+        sender: sender,
+        snr: snr
+      }
+    }
+  end
+
   def band
     return 0 unless frequency
 
