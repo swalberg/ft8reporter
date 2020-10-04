@@ -1,6 +1,10 @@
 class Spot < Sequel::Model
   many_to_one :observation_period
 
+  def to_a
+    [ id, timestamp, sender, spotter, frequency, band, mode, range, bearing, lat, lon, snr, grid, region, dxcc, decoder, antenna ]
+  end
+
   def band
     return 0 unless frequency
 

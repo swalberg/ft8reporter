@@ -1,3 +1,4 @@
+require 'csv'
 module Ft8reporter
 	class App < Padrino::Application
 		register ScssInitializer
@@ -73,16 +74,24 @@ module Ft8reporter
       ObservationPeriod.order(Sequel.desc(:run_start)).all.to_json
     end
 
-	get '/spots', :provides => :json do
-		@obs =  if params[:id]
-							ObservationPeriod.where(id: params[:id]).first
-						else
-							ObservationPeriod.last
-						end
+    get '/dump', :provides => :csv do
+      csv_string = CSV.generate(force_quotes: true) do |csv|
+        Spot.all.each do |spot|
+          csv << spot.to_a
+        end
+      end
+    end
 
-		@spots = Spot.where(observation_period_id: @obs.id)
-    all = @spots.map do |spot|
-      {
+    get '/spots', :provides => :json do
+      @obs =  if params[:id]
+                ObservationPeriod.where(id: params[:id]).first
+              else
+                ObservationPeriod.last
+              end
+
+      @spots = Spot.where(observation_period_id: @obs.id)
+      all = @spots.map do |spot|
+        {
           type: 'Feature',
           geometry: {
             type: 'Point',
@@ -100,6 +109,6 @@ module Ft8reporter
         type: 'FeatureCollection',
         features: all
       }.to_json
-		end
-	end
+    end
+  end
 end
